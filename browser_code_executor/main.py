@@ -11,8 +11,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sqlite.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
+
 config = configparser.ConfigParser()
-config.read("config/config.ini")
+path_to_config = os.path.join(os.path.dirname(__file__), "config/config.ini")
+config.read(path_to_config)
 
 
 class Table(db.Model):
@@ -27,6 +29,9 @@ class Table(db.Model):
         return "<Table %r>" % self.id
 
 
+db.create_all()
+
+
 def create_file(code):
     temp_dir = tempfile.gettempdir()
     temp_file = f"{temp_dir}/exec.py"
@@ -37,20 +42,15 @@ def create_file(code):
 
 def run_script(code, stdin, config):
     file = create_file(code)
-    args = [
-        "python3",
-        file,
-        config["blocked"]["imports"],
-        config["blocked"]["functions"],
-    ]
+    args = ["python", file]
     process = Popen(args=args, stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding="utf-8")
 
     try:
         stdout, stderr = process.communicate(
             stdin, timeout=int(config["timeout"]["timeout"])
         )
-    except TimeoutExpired as timeout:
-        stdout, stderr = "", f"TimeoutExpired: {timeout}"
+    except TimeoutExpired as to:
+        stdout, stderr = "", f"TimeoutExpired: {to}"
     finally:
         table = Table(code=code, stdin=stdin, stdout=stdout, stderr=stderr)
         os.remove(file)
@@ -120,4 +120,4 @@ def request_update(id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")

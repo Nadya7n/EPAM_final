@@ -12,8 +12,10 @@ Database
         {% for item in tables %}
         <div class="alert alert-info">
             <h3>Request № {{ item.id }}</h3>
-            <p>{{ item.code }}</p>
-            <p>{{ item.stdin }}</p>
+            <p><b>Code</p></b>
+            <pre><code class="language-python">{{ item.code }}</pre></code>
+            <p><b>Stdin</p></b>
+            <pre><code class="language-python">{{ item.stdin }}</pre></code>
             <a href="/database/{{ item.id }}" class="btn btn-warning">More</a>
         </div>
         {% endfor %}
