@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+Main page
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Forms</h1>
+    <form method="post">
+        <textarea name="code" id="code" class="form-control" cols="50"  placeholder="Input your code"></textarea><br>
+        <textarea name="stdin" id=stdin" class="form-control" cols="50" placeholder="*Optional: Input your stdin"></textarea><br>
+        <input type="submit" class="btn btn-success" value="Launch">
+    </form>
+</div>
+
+{% endblock %}

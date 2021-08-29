@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit request
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Edit request</h1>
+    <form method="post">
+        <textarea name="code" id="code" class="form-control" placeholder="Input your code">{{ table.code }}</textarea><br>
+        <textarea name="stdin" id=stdin" class="form-control" placeholder="*Optional: Input your stdin">{{ table.stdin }}</textarea><br>
+        <input type="submit" class="btn btn-success" value="Edit">
+    </form>
+</div>
+{% endblock %}

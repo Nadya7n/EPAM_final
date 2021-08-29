@@ -1,0 +1,15 @@
+textarea[name="code"], [name="stdout"], [name="stderr"] {
+font-size: 18px;
+height: 200px;
+width: 800px;
+background: #cff4fc;
+color: #055160;
+}
+
+textarea[name="stdin"] {
+font-size: 18px;
+height: 100px;
+width: 800px;
+background: #cff4fc;
+color: #055160;
+}

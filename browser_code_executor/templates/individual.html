@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+Request № {{ table.id }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Request № {{ table.id }}</h1>
+    <div class="element">
+        <h3>Code</h3>
+        <textarea name="code" id="code" class="form-control" cols="100">{{ table.code }}</textarea><br>
+        <h3>Stdin</h3>
+        <textarea name="stdin" id="stdin" class="form-control" cols="100">{{ table.stdin }}</textarea><br>
+        <h3>Stdout</h3>
+        <textarea name="stdout" id="stdout" class="form-control" cols="100">{{ table.stdout }}</textarea><br>
+        <h3>Stderr</h3>
+        <textarea name="stderr" id="stderr" class="form-control" cols="100">{{ table.stderr }}</textarea><br>
+        <a href="/database/{{ table.id }}/update" class="btn btn-success">Edit</a>
+        <a href="/database/{{ table.id }}/delete" class="btn btn-danger">Delete</a>
+    </div>
+</div>
+{% endblock %}
