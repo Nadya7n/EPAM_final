@@ -1,0 +1,20 @@
+name: CI
+
+on: push
+
+jobs:
+  code_quality:
+    runs-on: ubuntu-latest
+    name: Checks with black, isort and possibly run tests
+    container: python:3.9
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run script
+        run: |
+          pip install -r requirements.txt
+          ls -la
+          black --diff --check .
+          isort --diff --check .
+          py.test tests
