@@ -17,4 +17,3 @@ jobs:
           ls -la
           black --diff --check .
           isort --diff --check .
-          py.test tests
