@@ -6,7 +6,7 @@ background: #cff4fc;
 color: #055160;
 }
 
-textarea[name="stdin"] {
+textarea[name="stdin"], [name="timeout"] {
 font-size: 18px;
 height: 100px;
 width: 800px;

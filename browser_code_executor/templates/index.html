@@ -5,14 +5,13 @@ Main page
 {% endblock %}
 
 {% block body %}
-
 <div class="container mt-5">
     <h1>Form</h1>
     <form method="post">
         <textarea required name="code" id="code" class="form-control" cols="50" placeholder="Input your code"></textarea><br>
         <textarea name="stdin" id=stdin" class="form-control" cols="50" placeholder="*Optional: Input your stdin"></textarea><br>
+        <textarea name="timeout" id="timeout" class="form-control" cols="50" placeholder="*Optional: Input your timeout less than 5 seconds"></textarea><br>
         <input type="submit" class="btn btn-success" value="Launch">
     </form>
 </div>
-
 {% endblock %}
