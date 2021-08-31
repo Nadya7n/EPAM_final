@@ -40,9 +40,21 @@ def create_file(code):
     return temp_file
 
 
+def parse_security():
+    path_to_file = os.path.join(os.path.dirname(__file__), "config/security.txt")
+    with open(path_to_file) as fh:
+        return fh.read()
+
+
 def run_script(code, stdin, config):
-    file = create_file(code)
-    args = ["python", file]
+    code_with_security_check = parse_security() + code
+    file = create_file(code_with_security_check)
+    args = [
+        "python",
+        file,
+        config["black_list"]["functions"],
+        config["black_list"]["imports"],
+    ]
     process = Popen(args=args, stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding="utf-8")
 
     try:
@@ -51,6 +63,8 @@ def run_script(code, stdin, config):
         )
     except TimeoutExpired as to:
         stdout, stderr = "", f"TimeoutExpired: {to}"
+    except Exception as ex:
+        stdout, stderr = "", f"Error: {ex}"
     finally:
         table = Table(code=code, stdin=stdin, stdout=stdout, stderr=stderr)
         os.remove(file)

@@ -1,0 +1,25 @@
+import sys
+
+
+def check_security(block_function, block_module=None):
+    def inner(*args, **kwargs):
+        func_name, import_module_name = block_function.__name__, args[0]
+        if block_module == import_module_name:
+            raise IOError(f"Denied the rights to use the module {import_module_name}")
+        if not block_module:
+            if func_name == "open":
+                if len(args) > 1:
+                    if "r" not in args[1]:
+                        raise IOError(f"You have no access to change file")
+            else:
+                raise IOError(f"Denied the rights to use the function {func_name}")
+        return block_function(*args, **kwargs)
+    inner.__name__ = block_function.__name__
+    return inner
+
+
+for blocked_function in sys.argv[1].split(","):
+    __builtins__.__dict__[blocked_function] = check_security(__builtins__.__dict__[blocked_function])
+for blocked_import in sys.argv[2].split(","):
+    __builtins__.__dict__['__import__'] = check_security(__builtins__.__dict__['__import__'], blocked_import)
+del check_security
