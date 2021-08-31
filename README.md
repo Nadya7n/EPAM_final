@@ -19,28 +19,27 @@ For security reasons, we do not allow "os" module and functions "exec" and "eval
 ## Usage
 ### Docker
 1. Download container image
-
-    
-    docker pull nadya7n/browser_code_executor:mytag
+```
+docker pull nadya7n/browser_code_executor:mytag
+```
 
 2. Run container
-
-    
-    docker run nadya7n/browser_code_executor:mytag
+```
+docker run nadya7n/browser_code_executor:mytag
+```
 
 ### Git
 1. Download project
-
-    
-    git clone https://github.com/Nadya7n/EPAM_final.git
+```    
+git clone https://github.com/Nadya7n/EPAM_final.git
+```
 
 2. Install needed modules
-
-
-    pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
 
 3. Run project
-
-
-    python3 browser_code_executor/main.py
-
+```
+python3 browser_code_executor/main.py
+```
