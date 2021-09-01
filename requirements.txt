@@ -1,7 +1,5 @@
 pre-commit
 black
 isort
-pytest
-pytest-sugar
 flask
 flask_sqlalchemy
